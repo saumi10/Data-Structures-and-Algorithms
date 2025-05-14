@@ -47,7 +47,8 @@ int main()
 {
 
     int n, target;
-    cin >> n >> target;
+    cin >> n;
+    cin>>target;
 
     int arr[n];
     for (int i = 0; i < n; i++)
