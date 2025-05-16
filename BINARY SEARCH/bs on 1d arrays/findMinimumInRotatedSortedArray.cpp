@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
-// for unique
+// find minimum in rotated sorted array
+//  for unique elements
 int f(int arr[], int n)
 {
     int low = 0;
@@ -8,16 +9,16 @@ int f(int arr[], int n)
     int mini = INT_MAX;
     while (low <= high)
     {
-        int mid = low + ((high - low) / 2);
-        // left is sorted
+        int mid = (low + high) / 2;
+
         if (arr[low] <= arr[mid])
         {
-            mini = min(mini, arr[low]);
+            mini = min(arr[low], mini);
             low = mid + 1;
         }
         else
         {
-            mini = min(mini, arr[mid]);
+            mini = min(arr[mid], mini);
             high = mid - 1;
         }
     }

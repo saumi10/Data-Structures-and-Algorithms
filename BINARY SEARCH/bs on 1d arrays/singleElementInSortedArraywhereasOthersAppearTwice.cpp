@@ -2,33 +2,41 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int singleElement(int arr[], int n)
+int singleElement(int nums[], int n)
 {
     if (n == 1)
     {
-        return arr[0];
+        return nums[0];
     }
-    if (arr[0] != arr[1])
+    if (nums[0] != nums[1])
     {
-        return arr[0];
+        return nums[0];
     }
-    if (arr[n - 1] != arr[n - 2])
+    if (nums[n - 1] != nums[n - 2])
     {
-        return arr[n - 1];
+        return nums[n - 1];
     }
-
-    int low = 1;
-    int high = n - 2;
+    // applying BS on trimmed down search space
+    int low = 1, high = n - 2;
 
     while (low <= high)
     {
-        int mid = low + (high - low) / 2;
-        if (arr[mid] != arr[mid - 1] && arr[mid] != arr[mid + 1])
-        {
-            return arr[mid];
-        }
+        int mid = (low + high) / 2;
 
-        if ((arr[mid] == arr[mid + 1] && mid % 2 == 0) || (arr[mid] == arr[mid - 1] && mid % 2 == 1))
+        // if answer found at mid
+        if (nums[mid] != nums[mid - 1] && nums[mid] != nums[mid + 1])
+        {
+            return nums[mid];
+        }
+        // eliminating half which doesnt contain our answer element
+        // on the basis of mid index (if it is odd/even) and
+        // where does it have its duplicate element
+
+        // if mid is an odd index AND duplicate on its left side
+        // OR
+        // if mid is an EVEN index AND duplicate on its right side
+        // so eliminate left half as answer is on right half
+        if ((mid % 2 != 0 && nums[mid] == nums[mid - 1]) || (mid % 2 == 0 && nums[mid] == nums[mid + 1]))
         {
             low = mid + 1;
         }
