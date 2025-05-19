@@ -30,7 +30,7 @@ public:
 
 //DELETION OF HEAD
 Node<int> * deleteHead(Node<int> * head){
-    if(head==NULL) return head;
+    if(head==NULL) return head; //
 
     Node<int> * temp=head;
     head=head->next;
