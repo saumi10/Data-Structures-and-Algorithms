@@ -37,7 +37,29 @@ Node<int> * removeHead(Node<int> * head){
     return head;
 }
 
-//remove Element
+//remove Element k
+Node<int> *deleteElement(Node<int> *head, int k){
+    if(head==nullptr) return head;
+    if(head->data==k){
+        Node<int> *temp=head;
+        head=head->next;
+        free(temp);
+        return head;
+    }
+    Node<int> *temp=head;
+    Node<int> *prev=NULL;
+    while(temp!=NULL){
+        if(temp->data==k){
+            prev->next=prev->next->next;
+            free(temp);
+            return head;
+        }
+        prev=temp;
+        temp=temp->next;
+    }
+    return head;
+}
+
 
 //DELETION OF Kth node
 Node<int> * deleteKthElement(Node<int> * head , int k){
@@ -78,10 +100,11 @@ int main(){
         mover->next=temp;    // Link the previous node to the new one
         mover=temp; // Move the pointer to the new node
     }
-    cout<<"enter node K to delete"<<endl;
+    cout<<"enter node/element K to delete"<<endl;
     int k;
     cin>>k;
-    head= deleteKthElement(head,k);
+    //head= deleteKthElement(head,k);
+    head= deleteElement(head,k);
     
 
     // Now ,traversing and printing the LL

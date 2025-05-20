@@ -26,7 +26,7 @@ public:
 
 int searchInLinkedList(Node<int> *head, int k)
 {
-    // Write your code here.
+    // NEVER TAMPER THE GIVEN HEAD
     Node<int> *temp = head;
     while (temp)
     {

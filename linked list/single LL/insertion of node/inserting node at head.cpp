@@ -49,10 +49,10 @@ Node<int> * insertHead(Node<int> * head , int k){
 
 int main(){
     vector<int> v={1,2,3,4,5,6,7,53,38687,73};
-    Node<int> * head=new Node<int> (v[0]); // Create the head node
-    Node<int> * mover=head; // Pointer to track the last node
+    Node<int> * head=new Node<int> (v[0]); // Create the head node's pointer
+    Node<int> * mover=head; // Pointer to track the last node, starting from head
     for(int i=1;i<v.size();i++){
-        Node<int> * temp=new Node<int> (v[i]);    // Create a new node
+        Node<int> * temp=new Node<int> (v[i]);    // Create a new node pointer
         mover->next=temp;    // Link the previous node to the new one
         mover=temp; // Move the pointer to the new node
     }
