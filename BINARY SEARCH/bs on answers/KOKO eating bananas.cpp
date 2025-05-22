@@ -3,7 +3,6 @@ using namespace std;
 
 int maxElement(vector<int> &piles)
 {
-    //
     // finding max no. of bananas in the piles array which will be our high in BS
     int n = piles.size();
     int maxi = INT_MIN;
