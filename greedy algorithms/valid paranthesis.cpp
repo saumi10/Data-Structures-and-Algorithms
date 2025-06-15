@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+//brute force using two stack
+/*
 
 bool checkValidString(string s) {
         stack<int> st1;
@@ -37,3 +39,33 @@ bool checkValidString(string s) {
 
         
     }
+*/
+
+
+//greedy approach t.c=o(n), s.c=o(1)
+bool checkValidString(string s) {
+    int low = 0, high = 0;
+
+    for (char ch : s) {
+        if (ch == '(') {
+            low++;
+            high++;
+        }
+        else if (ch == ')') {
+            low--;
+            high--;
+        }
+        else { // '*'
+            low--;     // if '*' = ')'
+            high++;    // if '*' = '('
+        }
+
+        // invalid case
+        if (high < 0) return false;
+
+        // low can't go below 0
+        low = max(low, 0);
+    }
+
+    return low == 0;
+}
