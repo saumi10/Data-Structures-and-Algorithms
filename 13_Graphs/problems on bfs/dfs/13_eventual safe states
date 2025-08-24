@@ -1,0 +1,58 @@
+// https://www.geeksforgeeks.org/problems/eventual-safe-states/1
+#include <bits/stdc++.h>
+using namespace std;
+class Solution
+{
+private:
+    bool dfs(int i, vector<int> adj[], vector<int> &vis, vector<int> &pathVis, vector<int> &check)
+    {
+        vis[i] = 1;
+        pathVis[i] = 1;
+        for (auto it : adj[i])
+        {
+            // cycle detection conditions
+            if (!vis[it])
+            {
+                if (dfs(it, adj, vis, pathVis, check) == true)
+                {
+                    check[i] = 0;
+                    return true;
+                }
+            }
+            else if (vis[it] == 1 && pathVis[it] == 1)
+            {
+                check[i] = 0;
+                return true;
+            }
+        }
+        // no cycle detected
+        check[i] = 1;
+        pathVis[i] = 0;
+        return false;
+    }
+
+public:
+    vector<int> eventualSafeNodes(int V, vector<int> adj[])
+    {
+        // code here
+        vector<int> vis(V, 0);
+        vector<int> pathVis(V, 0);
+        vector<int> check(V, 0);
+        vector<int> safeNodes;
+        for (int i = 0; i < V; i++)
+        {
+            if (!vis[i])
+            {
+                dfs(i, adj, vis, pathVis, check);
+            }
+        }
+        for (int i = 0; i < V; i++)
+        {
+            if (check[i] == 1)
+            {
+                safeNodes.push_back(i);
+            }
+        }
+        return safeNodes;
+    }
+};
